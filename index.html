@@ -1,0 +1,642 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rahman–Sharkar Lineage</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --paper: #f2ecdd;
+    --paper-raised: #faf6ea;
+    --ink: #23201a;
+    --ink-soft: #6b6152;
+    --ink-faint: #9a9077;
+    --line: #ddd0ac;
+    --line-soft: #e8ddc0;
+    --dad: #1e5c4a;
+    --dad-soft: #e4ede8;
+    --mom: #7a2331;
+    --mom-soft: #f2e2e2;
+    --gold: #a9793b;
+    --shadow: rgba(70, 55, 20, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1b1712;
+      --paper-raised: #242019;
+      --ink: #efe7d6;
+      --ink-soft: #b8ad97;
+      --ink-faint: #7d7562;
+      --line: #3a3226;
+      --line-soft: #2c2620;
+      --dad: #58c6a4;
+      --dad-soft: #223330;
+      --mom: #e08292;
+      --mom-soft: #362327;
+      --gold: #d3a662;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1b1712;
+    --paper-raised: #242019;
+    --ink: #efe7d6;
+    --ink-soft: #b8ad97;
+    --ink-faint: #7d7562;
+    --line: #3a3226;
+    --line-soft: #2c2620;
+    --dad: #58c6a4;
+    --dad-soft: #223330;
+    --mom: #e08292;
+    --mom-soft: #362327;
+    --gold: #d3a662;
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 46ch;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs {
+    display: inline-flex;
+    gap: 4px;
+    margin: 32px auto 0;
+    padding: 4px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tab {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 10px 20px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .tab[aria-selected="true"] {
+    color: var(--paper);
+    background: var(--ink);
+  }
+  .tab .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+  .tab[data-side="dad"] .dot { background: var(--dad); }
+  .tab[data-side="mom"] .dot { background: var(--mom); }
+
+  /* ---------- Root couple ---------- */
+  .cornerstone {
+    margin: 40px 0 8px;
+    text-align: center;
+    padding: 28px 20px 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--paper-raised);
+    box-shadow: 0 1px 0 var(--shadow);
+  }
+  .cornerstone .gen-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  .cornerstone .names {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 600;
+  }
+  .cornerstone .amp {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+    margin: 0 12px;
+    font-size: 0.85em;
+  }
+  .cornerstone .note {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 36px 0 14px;
+    padding: 0 2px;
+  }
+  .controls .gen-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .controls button {
+    appearance: none;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .controls button:hover { text-decoration: underline; }
+  .controls button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* ---------- Branch cards (generation II) ---------- */
+  .branches {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .branch {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper-raised);
+    overflow: hidden;
+  }
+  .branch-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .branch-head:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .branch-head .chevron {
+    flex: none;
+    width: 18px; height: 18px;
+    color: var(--ink-faint);
+    transition: transform 0.22s ease;
+  }
+  .branch[data-open="true"] .chevron { transform: rotate(90deg); color: var(--accent); }
+
+  .branch-id {
+    flex: none;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Fraunces", serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .branch-title { flex: 1; min-width: 0; }
+  .branch-title .name-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .relation-tag {
+    font-family: "Work Sans", sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .spouse-line {
+    margin-top: 3px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .spouse-line .glyph { color: var(--gold); margin: 0 5px; }
+  .unknown { font-style: italic; color: var(--ink-faint); }
+
+  .branch-meta {
+    flex: none;
+    font-size: 12px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .branch-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+  }
+  .branch[data-open="true"] .branch-body { grid-template-rows: 1fr; }
+  .branch-body-inner { overflow: hidden; }
+  .branch-body-pad {
+    padding: 4px 18px 18px 62px;
+    border-top: 1px solid var(--line-soft);
+    margin-top: -1px;
+    padding-top: 14px;
+  }
+
+  /* ---------- Descendant list (recursive) ---------- */
+  .descendants {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .descendants .descendants {
+    margin-top: 6px;
+    padding-left: 22px;
+    border-left: 1.5px solid var(--line);
+  }
+  .person {
+    position: relative;
+    padding: 9px 0 9px 20px;
+  }
+  .person::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 18px;
+    width: 14px; height: 1.5px;
+    background: var(--line);
+  }
+  .descendants > .person:first-child::before,
+  .descendants > .person::before {
+    /* connector for every item; top-level list under branch has no left border, still fine */
+  }
+  .person-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 7px;
+    font-size: 14.5px;
+  }
+  .person-name {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 15.5px;
+  }
+  .person-name.you {
+    color: var(--gold);
+  }
+  .you-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--gold);
+    padding: 1.5px 7px;
+    border-radius: 999px;
+  }
+  .person-note {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .person-spouse {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .person-spouse .glyph { color: var(--gold); margin: 0 4px; }
+
+  /* ---------- Bridge note ---------- */
+  .bridge-note {
+    margin-top: 44px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-faint);
+    line-height: 1.6;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .bridge-note strong { color: var(--gold); font-weight: 600; }
+
+  @media (max-width: 520px) {
+    .branch-body-pad { padding-left: 30px; }
+    .branch-meta { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chevron, .branch-body { transition: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">A Family Record</div>
+    <h1>The Rahman &amp; Sharkar Lineage</h1>
+    <p class="sub">Two family lines, kept side by side — your father's people and your mother's — meeting in one household: Pollob &amp; Ruba, and their sons.</p>
+
+    <div class="tabs" role="tablist" aria-label="Choose a family side">
+      <button class="tab" data-side="dad" role="tab" aria-selected="true" id="tab-dad">
+        <span class="dot"></span>Dad's Side
+      </button>
+      <button class="tab" data-side="mom" role="tab" aria-selected="false" id="tab-mom">
+        <span class="dot"></span>Mom's Side
+      </button>
+    </div>
+  </header>
+
+  <section id="cornerstone"></section>
+
+  <div class="controls">
+    <span class="gen-label">The Eight Children</span>
+    <button id="toggle-all" type="button">Expand all</button>
+  </div>
+
+  <ul class="branches" id="branches" role="list"></ul>
+
+  <p class="bridge-note" id="bridge-note"></p>
+</div>
+
+<script>
+  // ---------------- Data ----------------
+  const dadSide = {
+    root: { a: "Zillur Rahman", b: "Razia Sultana", note: "Both have passed away" },
+    children: [
+      { name: "Minu", relation: "Boro Fupi", spouse: "Boro Fupa", spouseNote: "name not recorded · passed away", children: [
+        { name: "Titas", spouse: "Mousumi", children: [ {name:"Mahir"}, {name:"Mahin"} ] },
+        { name: "Shetu", spouse: "her husband", spouseNote: "name not recorded", note: "no children" },
+        { name: "Shumi", note: "passed away young · never married" },
+      ]},
+      { name: "Tul Tuli", relation: "Mejo Fupi", spouse: "Jinnah Kha", spouseRel: "Mejo Fupa", children: [
+        { name: "Tanin", spouse: "Bithi", children: [ {name:"Shayad"}, {name:"Shayan"}, {name:"Shayra"} ] },
+        { name: "Tania", spouse: "Manik", children: [ {name:"Mrittika"}, {name:"Yusha"} ] },
+        { name: "Tithi", spouse: "Rudro", children: [ {name:"Aditto"}, {name:"Araf"} ] },
+        { name: "Trisna", spouse: "Souvik", children: [ {name:"Adrita"}, {name:"Anindita"} ] },
+        { name: "Lisa", spouse: "Rupok", children: [ {name:"Hritika"} ] },
+        { name: "Oishi", spouse: "Shoikot", children: [ {name:"Sneha"} ] },
+      ]},
+      { name: "Popy", relation: "Choto Fupi", spouse: "Samad", spouseRel: "Choto Fupa", children: [
+        { name: "Mehrab", spouse: "his wife", spouseNote: "name not recorded", children: [ {name:"Liyana"} ] },
+        { name: "Nishu", spouse: "Saeef", children: [ {name:"Sami"}, {name:"Wafi"} ] },
+      ]},
+      { name: "Kajol", relation: "Boro Chacha", spouse: "Niti", spouseRel: "Boro Chachi", children: [
+        { name: "Noushin", note: "unmarried" },
+        { name: "Nahian", note: "unmarried" },
+        { name: "Samin", note: "unmarried" },
+      ]},
+      { name: "Sojol", relation: "Mejo Chacha", spouse: "Bitu", spouseRel: "Mejo Chachi", children: [
+        { name: "Shreya", spouse: "Akash" },
+      ]},
+      { name: "Sobuj", relation: "Choto Chacha", spouse: "Fancy", spouseRel: "Choto Chachi", children: [
+        { name: "Abeer", note: "unmarried" },
+        { name: "Nazia", note: "unmarried" },
+        { name: "Nafisa", note: "unmarried" },
+        { name: "Zarin", note: "unmarried" },
+      ]},
+      { name: "Pollob", relation: "Zawad's Father", spouse: "Ruba", spouseRel: "Zawad's Mother", highlight: true, children: [
+        { name: "Zawad", you: true, note: "unmarried" },
+        { name: "Zarif", note: "unmarried" },
+      ]},
+      { name: "Pollobi", relation: "Fupi", note: "passed away young · never married" },
+    ]
+  };
+
+  const momSide = {
+    root: { a: "Latif Sharkar", b: "Jahan Ara", note: "Both have passed away" },
+    children: [
+      { name: "Zakia Begum", relation: "Zawad's Nini", note: "passed away", spouse: "Abdul Bashed", spouseRel: "Nana", spouseNote: "passed away", children: [
+        { name: "Ruba", relation: "Zawad's Mother", spouse: "Pollob", spouseRel: "Zawad's Father", highlight: true, children: [
+          { name: "Zawad", you: true, note: "unmarried" },
+          { name: "Zarif", note: "unmarried" },
+        ]},
+        { name: "Shompa", relation: "Khala", spouse: "Mainul", spouseRel: "Khalu", spouseNote: "passed away", children: [
+          {name:"Saad"}, {name:"Zayed"}, {name:"Musab"}, {name:"Manha"}
+        ]},
+        { name: "Sourov", relation: "Mama", spouse: "Shorna", spouseRel: "Mami", children: [
+          {name:"Safwan"}, {name:"Suhaib"}
+        ]},
+      ]},
+      { name: "Shampoo", relation: "Boro Nana", spouse: "Anu", children: [
+        { name: "Suvro", relation: "Mama", spouse: "his wife", spouseNote: "name not recorded", children: [
+          { name: "his daughter", note: "name not recorded" }
+        ]},
+        { name: "Jessi", relation: "Khala", spouse: "Rabbi", spouseRel: "Khalu", children: [ {name:"Mehek"} ] },
+        { name: "Maisha", relation: "Khalamuni", spouse: "Rony", children: [
+          { name: "their daughter", note: "name not recorded" }
+        ]},
+      ]},
+      { name: "Gems", relation: "Mejo Nana", spouse: "Shetu", children: [
+        { name: "Jipu", spouse: "his wife", spouseNote: "name not recorded", children: [
+          { name: "his daughter", note: "name not recorded" }
+        ]},
+        { name: "Jitu", spouse: "her husband", spouseNote: "name not recorded", note: "no children" },
+      ]},
+      { name: "Gama", relation: "Sejo Nana", spouse: "Dulali", children: [
+        { name: "Samila", spouse: "Piyash", note: "no children yet" },
+        { name: "Lamisa", note: "unmarried" },
+      ]},
+      { name: "Toffey", relation: "Choto Nana", spouse: "Sumi", children: [
+        { name: "Farisa", note: "unmarried" },
+        { name: "Fimad", note: "unmarried" },
+      ]},
+      { name: "Lefa", relation: "Apa", spouse: "Tanzil", children: [
+        { name: "Tuson", note: "unmarried" },
+        { name: "Tinon", spouse: "his wife", spouseNote: "name not recorded", note: "no children yet" },
+        { name: "Antoz", note: "unmarried" },
+      ]},
+      { name: "Moly", relation: "Mejo Apa", spouse: "Nayan", children: [
+        { name: "Fatin", note: "unmarried" },
+        { name: "Rakin", note: "unmarried" },
+      ]},
+      { name: "Tripty", relation: "Soto Apa", spouse: "Aziz", children: [
+        { name: "Tasfia", spouse: "Nehal", note: "no children" },
+      ]},
+    ]
+  };
+
+  const DATA = { dad: dadSide, mom: momSide };
+
+  // ---------------- Rendering ----------------
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function countDescendants(node) {
+    if (!node.children) return 0;
+    let n = node.children.length;
+    node.children.forEach(c => n += countDescendants(c));
+    return n;
+  }
+
+  function renderPerson(p) {
+    const nameClass = p.you ? "person-name you" : "person-name";
+    let spouseHtml = "";
+    if (p.spouse) {
+      const spouseName = p.spouseNote ? `<span class="unknown">${esc(p.spouse)}</span>` : esc(p.spouse);
+      const rel = p.spouseRel ? ` <span class="unknown">(${esc(p.spouseRel)})</span>` : "";
+      spouseHtml = `<div class="person-spouse"><span class="glyph">&amp;</span>${spouseName}${rel}${p.spouseNote ? ` <span class="unknown">— ${esc(p.spouseNote)}</span>` : ""}</div>`;
+    }
+    const noteHtml = p.note ? `<span class="person-note">${esc(p.note)}</span>` : "";
+    const badge = p.you ? `<span class="you-badge">You</span>` : "";
+    const childrenHtml = p.children && p.children.length
+      ? `<ul class="descendants">${p.children.map(renderPerson).join("")}</ul>`
+      : "";
+    return `<li class="person">
+      <div class="person-row">
+        <span class="${nameClass}">${esc(p.name)}</span>
+        ${badge}
+        ${noteHtml}
+      </div>
+      ${spouseHtml}
+      ${childrenHtml}
+    </li>`;
+  }
+
+  function renderBranch(child, index) {
+    const relTag = child.relation ? `<span class="relation-tag">${esc(child.relation)}</span>` : "";
+    let spouseHtml = "";
+    if (child.spouse) {
+      const spouseName = child.spouseNote ? `<span class="unknown">${esc(child.spouse)}</span>` : esc(child.spouse);
+      const rel = child.spouseRel ? ` <span class="unknown">(${esc(child.spouseRel)})</span>` : "";
+      spouseHtml = `<div class="spouse-line"><span class="glyph">&amp;</span>${spouseName}${rel}${child.spouseNote ? ` <span class="unknown">— ${esc(child.spouseNote)}</span>` : ""}</div>`;
+    } else if (child.note) {
+      spouseHtml = `<div class="spouse-line unknown">${esc(child.note)}</div>`;
+    }
+    const ownNoteTag = (child.note && child.spouse) ? `<span class="person-note">${esc(child.note)}</span>` : "";
+    const total = countDescendants(child);
+    const meta = total > 0 ? `${total} descendant${total === 1 ? "" : "s"}` : "";
+    const body = child.children && child.children.length
+      ? `<ul class="descendants">${child.children.map(renderPerson).join("")}</ul>`
+      : `<p class="unknown" style="font-size:13px;margin:4px 0 0;">No recorded children.</p>`;
+
+    return `<li class="branch" data-open="false">
+      <button class="branch-head" type="button" aria-expanded="false">
+        <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l7 6-7 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="branch-id">${index + 1}</span>
+        <span class="branch-title">
+          <span class="name-row">${esc(child.name)}${child.you ? ' <span class="you-badge">You</span>' : ''} ${relTag} ${ownNoteTag}</span>
+          ${spouseHtml}
+        </span>
+        <span class="branch-meta">${meta}</span>
+      </button>
+      <div class="branch-body">
+        <div class="branch-body-inner">
+          <div class="branch-body-pad">${body}</div>
+        </div>
+      </div>
+    </li>`;
+  }
+
+  function renderCornerstone(root) {
+    document.getElementById("cornerstone").innerHTML = `
+      <div class="cornerstone">
+        <div class="gen-label">Generation I</div>
+        <div class="names">${esc(root.a)}<span class="amp">&amp;</span>${esc(root.b)}</div>
+        <div class="note">The founding couple of this line${root.note ? ` · ${esc(root.note)}` : ""}</div>
+      </div>`;
+  }
+
+  let currentSide = "dad";
+
+  function render(side) {
+    currentSide = side;
+    const data = DATA[side];
+    document.documentElement.style.setProperty("--accent", `var(--${side})`);
+    document.documentElement.style.setProperty("--accent-soft", `var(--${side}-soft)`);
+    renderCornerstone(data.root);
+    document.getElementById("branches").innerHTML = data.children.map(renderBranch).join("");
+    document.getElementById("toggle-all").textContent = "Expand all";
+    document.getElementById("toggle-all").dataset.state = "collapsed";
+    document.getElementById("bridge-note").innerHTML = side === "dad"
+      ? `Pollob (branch 7 above) is <strong>Zawad's father</strong> — follow the thread to Mom's Side to see how the two families join.`
+      : `Ruba (branch 1 above) is <strong>Zawad's mother</strong> — follow the thread back to Dad's Side to see how the two families join.`;
+
+    document.querySelectorAll(".tab").forEach(t => {
+      t.setAttribute("aria-selected", t.dataset.side === side ? "true" : "false");
+    });
+
+    document.querySelectorAll(".branch-head").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const branch = btn.closest(".branch");
+        const isOpen = branch.dataset.open === "true";
+        branch.dataset.open = isOpen ? "false" : "true";
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      });
+    });
+  }
+
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => render(tab.dataset.side));
+  });
+
+  document.getElementById("toggle-all").addEventListener("click", (e) => {
+    const expanding = e.target.dataset.state !== "expanded";
+    document.querySelectorAll(".branch").forEach(b => {
+      b.dataset.open = expanding ? "true" : "false";
+      b.querySelector(".branch-head").setAttribute("aria-expanded", String(expanding));
+    });
+    e.target.textContent = expanding ? "Collapse all" : "Expand all";
+    e.target.dataset.state = expanding ? "expanded" : "collapsed";
+  });
+
+  render("dad");
+</script>
